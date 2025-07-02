@@ -432,4 +432,84 @@ Key Point: Most user programs run in this mode — no access to hardware or crit
 * Registers: Has banked registers R8–R14 and SPSR\_fiq
 * Entry: Entered automatically when FIQ interrupt is triggered
 
-Key Point: Specially optimized for # Documents
+Key Point: Specially optimized for # Documents.
+## 3. IRQ Mode (irq) – Interrupt Request
+* Privilege Level: Privileged
+* Purpose: Handles normal hardware interrupts (slower than FIQ)
+* Registers: Banked R13 (SP), R14 (LR), and SPSR\_irq
+* Entry: Entered automatically when IRQ interrupt is triggered
+
+Key Point: Used for most peripheral interrupt handling (timers, UART, etc.).
+
+## 4. Supervisor Mode (svc)
+* Privilege Level: Privileged
+* Purpose: Handles OS-level operations and system calls
+* Registers: Banked SP (R13), LR (R14), and SPSR\_svc
+* Entry: Triggered by the SVC (software interrupt) instruction
+
+Key Point: The OS kernel usually runs in this mode.
+
+## 5. Abort Mode (abt)
+* Privilege Level: Privileged
+* Purpose: Handles memory access violations (e.g., accessing bad memory)
+* Registers: Banked SP (R13), LR (R14), and SPSR\_abt
+* Entry: Entered automatically when a prefetch or data abort occurs
+
+Key Point: Used for memory fault handling like segmentation faults or page faults.
+
+## 6. Undefined Mode (und)
+* Privilege Level: Privileged
+* Purpose: Handles illegal or unsupported instructions
+* Registers: Banked SP (R13), LR (R14), and SPSR\_und
+* Entry: Entered automatically when an undefined instruction is executed
+
+Key Point: Useful for emulation or capturing software bugs.
+
+## 7. System Mode (sys)
+* Privilege Level: Privileged
+* Purpose: Runs privileged OS code, but without triggering exceptions
+* Registers: Shares user-mode registers (no banking), full system access
+* Entry: Software-controlled (e.g., switch from SVC using CPSR)
+
+Key Point: Allows the OS to run user-mode code with full access but no mode switch.
+
+## 8. Monitor Mode (mon) (TrustZone only)
+* Privilege Level: Privileged
+* Purpose: Handles secure world operations in ARM TrustZone
+* Registers: Own banked SP, LR, and SPSR\_mon
+* Entry: On secure monitor calls (SMC) or secure exceptions
+
+Key Point: Part of ARM's security extension to separate secure vs. non-secure execution.
+
+## 8. Registers & Banked Registers
+
+
+* 16 General Purpose Registers (R0–R15):
+  * R13 = Stack Pointer (SP)
+  * R14 = Link Register (LR)
+  * R15 = Program Counter (PC)
+* CPSR/SPSR: Current/Saved Program Status Registers (flags, mode, interrupts)
+* Banked Registers: FIQ, IRQ, SVC, etc., have private SP/LR/SPSR
+  * Enables fast, efficient interrupt handling without saving all registers.
+ 
+
+## What Are SPSR and CPSR?
+* CPSR: Current Program Status Register — holds flags, mode bits, interrupt masks
+* SPSR: Saved Program Status Register — each privileged mode has its own copy
+
+  * When an exception occurs, CPSR is copied to SPSR
+  * On returning from exception, SPSR is copied back to CPSR
+
+## 9. Use Cases & Applications
+* Mobile devices – ARM Cortex-A (Android, iOS)
+* Embedded systems – ARM Cortex-M (IoT, medical devices)
+* Automotive – ARM Cortex-R (ABS, ECU)
+* Consumer electronics – TVs, cameras, appliances
+* Networking & servers – Neoverse cores (cloud-native workloads)
+* AI & Security – ARMv9 features TrustZone, SVE (Scalable Vector Extensions)
+sions)
+
+* Automotive – ARM Cortex-R (ABS, ECU)
+* Consumer electronics – TVs, cameras, appliances
+* Networking & servers – Neoverse cores (cloud-native workloads)
+* AI & Security – ARMv9 features TrustZone, SVE (Scalable Vector Extensions)
