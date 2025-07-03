@@ -332,6 +332,13 @@ ARM = RISC → Efficient, low power → Ideal for mobile and embedded.
 * Cortex-A: Application processors (smartphones, tablets)
 * Cortex-R: Real-time processors (automotive, industrial)
 * Cortex-M: Microcontrollers (IoT, wearables, sensors)
+* There are three primary lines in the Neoverse portfolio:
+* | Family          | Focus                   | Key Features                             | Target Workloads                                |
+| ------------------| ------------------------| ---------------------------------------- | ------------------------------------|
+| Neoverse V-Series | Performance             | Out-of-order, high IPC, large caches     | AI/ML, cloud workloads              |
+| Neoverse N-Series | General Compute         | Balanced performance and efficiency      | Cloud servers, storage              |
+| Neoverse E-Series | Efficiency & Throughput | In-order, high core count, dense compute | Edge devices, networking appliances |
+
 
 ## 4. Interview Q: ARM Architecture Overview
 ```
