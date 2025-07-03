@@ -507,9 +507,3 @@ Key Point: Part of ARM's security extension to separate secure vs. non-secure ex
 * Consumer electronics – TVs, cameras, appliances
 * Networking & servers – Neoverse cores (cloud-native workloads)
 * AI & Security – ARMv9 features TrustZone, SVE (Scalable Vector Extensions)
-sions)
-
-* Automotive – ARM Cortex-R (ABS, ECU)
-* Consumer electronics – TVs, cameras, appliances
-* Networking & servers – Neoverse cores (cloud-native workloads)
-* AI & Security – ARMv9 features TrustZone, SVE (Scalable Vector Extensions)
