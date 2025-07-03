@@ -322,6 +322,8 @@ ARM = RISC → Efficient, low power → Ideal for mobile and embedded.
 
 ## 3. ARM Core Families
 ```
+![image](https://github.com/user-attachments/assets/d46d078a-3cf7-4cd0-a306-6a13f8dcc957)
+
                    ┌────────────────────────────────────┐
                    │          ARM Core Families         │
                    └────────────────────────────────────┘
