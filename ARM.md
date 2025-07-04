@@ -80,8 +80,17 @@ Both do the same thing, but Thumb uses fewer bits.
 ---
 ### Thumb-2
 * Introduced in ARMv6T2 / ARMv7.
-* Mix of 16-bit and 32-bit instructions.
+* Code is written using a mixture of 16-bit and 32-bit instructions.
 * Most modern Cortex-M and Cortex-A cores support Thumb-2.
+```
+// Thumb (16-bit)
+MOVS R0, #1
+ADDS R1, R0, #2
+
+// Thumb-2 (mixed)
+MOVS R0, #1          ; 16-bit
+ADD  R1, R0, R2, LSL #2 ; 32-bit (more complex operation)
+```
 
 ### Interview Q: What is CISC?
 CISC (Complex Instruction Set Computer) is a CPU architecture design that uses a large set of complex instructions, where a single instruction can perform multiple low-level operations (like memory access, arithmetic, and control flow).
@@ -347,7 +356,7 @@ ARM = RISC → Efficient, low power → Ideal for mobile and embedded.
 * Cortex-R: Real-time processors (automotive, industrial)
 * Cortex-M: Microcontrollers (IoT, wearables, sensors)
 * There are three primary lines in the Neoverse portfolio:
-* | Family          | Focus                   | Key Features                             | Target Workloads                                |
+| Family            | Focus                   | Key Features                             | Target Workloads                                |
 | ------------------| ------------------------| ---------------------------------------- | ------------------------------------|
 | Neoverse V-Series | Performance             | Out-of-order, high IPC, large caches     | AI/ML, cloud workloads              |
 | Neoverse N-Series | General Compute         | Balanced performance and efficiency      | Cloud servers, storage              |
@@ -443,7 +452,6 @@ ARM = RISC → Efficient, low power → Ideal for mobile and embedded.
 * Purpose: Normal application (user-level) code runs here
 * Access: Cannot access privileged system features or control registers
 * Registers: Uses general-purpose registers (R0–R15), no banked registers
-* Entry: Default mode after boot or when returning from system calls
 
 Key Point: Most user programs run in this mode — no access to hardware or critical resources.
 
@@ -451,30 +459,27 @@ Key Point: Most user programs run in this mode — no access to hardware or crit
 * Privilege Level: Privileged
 * Purpose: Handles high-priority, time-sensitive interrupts
 * Registers: Has banked registers R8–R14 and SPSR\_fiq
-* Entry: Entered automatically when FIQ interrupt is triggered
 
-Key Point: Specially optimized for # Documents.
+Key Point: Designed for fast response and minimal overhead in time-critical tasks.
+
 ## 3. IRQ Mode (irq) – Interrupt Request
 * Privilege Level: Privileged
 * Purpose: Handles normal hardware interrupts (slower than FIQ)
 * Registers: Banked R13 (SP), R14 (LR), and SPSR\_irq
-* Entry: Entered automatically when IRQ interrupt is triggered
 
-Key Point: Used for most peripheral interrupt handling (timers, UART, etc.).
+Key Point: Used for most peripheral interrupt handling (timers, UART).
 
 ## 4. Supervisor Mode (svc)
 * Privilege Level: Privileged
 * Purpose: Handles OS-level operations and system calls
 * Registers: Banked SP (R13), LR (R14), and SPSR\_svc
-* Entry: Triggered by the SVC (software interrupt) instruction
 
 Key Point: The OS kernel usually runs in this mode.
 
 ## 5. Abort Mode (abt)
 * Privilege Level: Privileged
-* Purpose: Handles memory access violations (e.g., accessing bad memory)
+* Purpose: Handles memory access violations (accessing bad memory)
 * Registers: Banked SP (R13), LR (R14), and SPSR\_abt
-* Entry: Entered automatically when a prefetch or data abort occurs
 
 Key Point: Used for memory fault handling like segmentation faults or page faults.
 
@@ -482,7 +487,6 @@ Key Point: Used for memory fault handling like segmentation faults or page fault
 * Privilege Level: Privileged
 * Purpose: Handles illegal or unsupported instructions
 * Registers: Banked SP (R13), LR (R14), and SPSR\_und
-* Entry: Entered automatically when an undefined instruction is executed
 
 Key Point: Useful for emulation or capturing software bugs.
 
@@ -490,7 +494,6 @@ Key Point: Useful for emulation or capturing software bugs.
 * Privilege Level: Privileged
 * Purpose: Runs privileged OS code, but without triggering exceptions
 * Registers: Shares user-mode registers (no banking), full system access
-* Entry: Software-controlled (e.g., switch from SVC using CPSR)
 
 Key Point: Allows the OS to run user-mode code with full access but no mode switch.
 
@@ -498,7 +501,6 @@ Key Point: Allows the OS to run user-mode code with full access but no mode swit
 * Privilege Level: Privileged
 * Purpose: Handles secure world operations in ARM TrustZone
 * Registers: Own banked SP, LR, and SPSR\_mon
-* Entry: On secure monitor calls (SMC) or secure exceptions
 
 Key Point: Part of ARM's security extension to separate secure vs. non-secure execution.
 
@@ -510,6 +512,7 @@ Key Point: Part of ARM's security extension to separate secure vs. non-secure ex
   * R14 = Link Register (LR)
   * R15 = Program Counter (PC)
 * CPSR/SPSR: Current/Saved Program Status Registers (flags, mode, interrupts)
+* Banked registers are special copies of registers that only exist in certain CPU modes (FIQ, IRQ, Supervisor). They allow fast context switching by avoiding the need to save/restore shared registers during exceptions.
 * Banked Registers: FIQ, IRQ, SVC, etc., have private SP/LR/SPSR
   * Enables fast, efficient interrupt handling without saving all registers.
  
@@ -522,6 +525,7 @@ Key Point: Part of ARM's security extension to separate secure vs. non-secure ex
   * On returning from exception, SPSR is copied back to CPSR
 
 ## 9. Use Cases & Applications
+
 * Mobile devices – ARM Cortex-A (Android, iOS)
 * Embedded systems – ARM Cortex-M (IoT, medical devices)
 * Automotive – ARM Cortex-R (ABS, ECU)
