@@ -187,19 +187,7 @@ STR R2, [R0, #4]  ; Store result back to memory
  └────────────────┘           └────────────────┘            └────────────────┘
 ```
 
-| Feature                     | ARM (RISC)                              | x86 (CISC)                              |
-| --------------------------- | ------------------------------------------- | ------------------------------------------- |
-| ISA Type                | RISC (Reduced Instruction Set Computer)     | CISC (Complex Instruction Set Computer)     |
-| Instruction Size        | Fixed (mostly 32-bit, Thumb = 16-bit)       | Variable (1 to 15 bytes)                    |
-| Instruction Complexity  | Simple, single operation per instruction    | Complex, multi-operation instructions       |
-| Execution Time          | Usually 1 cycle per instruction             | May take multiple cycles                    |
-| Code Size               | Larger code size (unless using Thumb)       | Smaller code (due to powerful instructions) |
-| Power Efficiency        | Low (used in mobiles, embedded)             | High (used in desktops/servers)            |
-| Common Uses             | Smartphones, tablets, IoT, embedded         | Laptops, desktops, servers                  |
-| Registers               | 16 general-purpose (AArch32) / 31 (AArch64) | 8 GPRs (x86), 16 GPRs (x86-64)              |
-| Load/Store Architecture | Yes (data must be loaded to registers)      | No (operations can be directly on memory)   |
-| Endian Support          | Bi-endian (little/big)                      | Little-endian                               |
-
+```
 ### Interview Q: In CISC and RISC Which executes faster and why?
 
 In most modern systems, RISC architectures typically execute instructions faster than CISC.
@@ -224,7 +212,7 @@ MOV R0, #5
 MOV R1, #3
 ADD R2, R0, R1
 ```
-
+```
 #### x86 Assembly (CISC)
 
 ```asm
