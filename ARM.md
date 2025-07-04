@@ -194,13 +194,13 @@ In most modern systems, RISC architectures typically execute instructions faster
 
 ### RISC Executes Faster – Here's Why:
 
-| Feature                            | **RISC**                     | **CISC**                             |
-| ---------------------------------- | ---------------------------- | ------------------------------------ |
-| **Instruction Complexity**         | Simple, uniform instructions | Complex, multi-step instructions     |
-| **Execution Time per Instruction** | 1 clock cycle (usually)      | Multiple clock cycles                |
-| **Pipelining Efficiency**          | Very efficient               | Harder to pipeline                   |
-| **Instruction Decoding**           | Simple (fixed size)          | Complex (variable size)              |
-| **Hardware Requirements**          | Simpler, optimized for speed | More complex logic (e.g., microcode) |
+| Feature                        | RISC                         | CISC                                 |
+| -------------------------------| ---------------------------- | ------------------------------------ |
+| Instruction Complexity         | Simple, uniform instructions | Complex, multi-step instructions     |
+| Execution Time per Instruction | 1 clock cycle (usually)      | Multiple clock cycles                |
+| Pipelining Efficiency          | Very efficient               | Harder to pipeline                   |
+| Instruction Decoding           | Simple (fixed size)          | Complex (variable size)              |
+| Hardware Requirements          | Simpler, optimized for speed | More complex logic (e.g., microcode) |
 
 
 ### Example: Add Two Numbers
@@ -217,11 +217,11 @@ ADD R2, R0, R1
 ```asm
 MOV AX, 5
 ADD AX, 3
-```
+
 
 * ARM: Each step is simple and explicit.
 * x86: Instructions are powerful and compact (ADD can take immediate value).
-
+```
 ### What is a Processor?
 
 A processor (also called a CPU – Central Processing Unit) is the brain of a computer or embedded system. It performs calculations, logical decisions, and controls the execution of programs by processing instructions one step at a time.
