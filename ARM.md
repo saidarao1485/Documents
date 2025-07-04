@@ -211,8 +211,7 @@ In most modern systems, RISC architectures typically execute instructions faster
 MOV R0, #5
 MOV R1, #3
 ADD R2, R0, R1
-```
-```
+
 #### x86 Assembly (CISC)
 
 ```asm
